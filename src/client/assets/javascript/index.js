@@ -81,6 +81,10 @@ async function handleCreateRace() {
 		// TODO - Get player_id and track_id from the store
 		const track_id = store.track_id;
 		const player_id = store.player_id;
+		if(!track_id || !player_id) {
+			alert(`Select track and racer to start the race!`);
+			return;
+		  }
 		// const race = TODO - invoke the API call to create the race, then save the result
 		const race = await createRace(player_id, track_id);
 		// TODO - update the store with the race id
@@ -107,6 +111,7 @@ function runRace(raceID) {
 
 			// TODO - if the race info status property is "in-progress", update the leaderboard by calling:
 			.then(race => {
+				console.log('Race status: ', race.status)
 				if(race.status === "in-progress"){
 					renderAt('#leaderBoard', raceProgress(race.positions))
 				}
@@ -217,13 +222,20 @@ function renderRacerCard(racer) {
 		"Racer 4": "Peachette",
 		"Racer 5": "Toadette"	
 	}
-
+	racerImages = {
+		"Racer 1": "mario.png",
+		"Racer 2": "luigi.png",
+		"Racer 3": "yoshi.png",
+		"Racer 4": "pachette.png",
+		"Racer 5": "toadette.png"	
+	}
 	return `
-		<li class="cardpodracer${id}" id="${id}">
+		<li class="card podracer" id="${id}">
+			<img src="/assets/imgs/${racerImages[driver_name]}" class="podracerimage">
 			<h3>${racerNames[driver_name]}</h3>
-			<p>${top_speed}</p>
-			<p>${acceleration}</p>
-			<p>${handling}</p>
+			<p>Top Speed: ${top_speed}</p>
+			<p>Acceleration: ${acceleration}</p>
+			<p>Handling: ${handling}</p>
 		</li>
 	`
 }
@@ -254,10 +266,19 @@ function renderTrackCard(track) {
 		"Track 5": "Shy Guy Beach",
 		"Track 6": "Toad's Factory"
 	}
+	trackImages = {
+		"Track 1": "luigiraceway.png",
+		"Track 2": "peach.PNG",
+		"Track 3": "yoshifalls.png",
+		"Track 4": "gorge.jpg",
+		"Track 5": "shy.jpg",
+		"Track 6": "factory.png",		
+	}
 	return `
-		<li id="${id}" class="cardtrack${id}">
+		<li id="${id}" class="card track">
+			<img src="/assets/imgs/${trackImages[name]}" class="trackimage">
 			<h3>${trackNames[name]}</h3>
-		</li>
+		</li>	
 	`
 }
 

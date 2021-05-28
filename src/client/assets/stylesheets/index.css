@@ -1,76 +1,14 @@
 /* -------------------  GENERAL SITE STYLES --------------------- */
 
 /* -------------------  MOBILE  --------------------- */
-.cardpodracer1{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/mario.png) no-repeat 5px 50%;;
-  background-size: 100px 100px;
-  background-position: bottom right;
+.trackimage {
+  width: 150px;
+  height: 100px;
 }
 
-.cardpodracer2{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/luigi.png) no-repeat 5px 50%;;
-  background-size: 100px 100px;
-  background-position: bottom right;
-}
-
-.cardpodracer3{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/yoshi.png) no-repeat 5px 50%;;
-  background-size: 100px 100px;
-  background-position: bottom right;
-}
-
-.cardpodracer4{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/pachette.png) no-repeat 5px 50%;;
-  background-size: 100px 100px;
-  background-position: bottom right;
-}
-
-.cardpodracer5{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/toadette.png) no-repeat 5px 50%;;
-  background-size: 100px 100px;
-  background-position: bottom right;
-}
-
-.cardtrack1{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/luigiraceway.png) no-repeat 5px 50%;;
-  background-size: 150px 150px;
-  background-position: bottom right;
-}
-.cardtrack2{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/peach.PNG) no-repeat 5px 50%;;
-  background-size: 150px 150px;
-  background-position: bottom right;
-}
-.cardtrack3{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/yoshifalls.png) no-repeat 5px 50%;;
-  background-size: 150px 150px;
-  background-position: bottom right;
-}
-.cardtrack4{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/gorge.jpg) no-repeat 5px 50%;;
-  background-size: 150px 150px;
-  background-position: bottom right;
-}
-.cardtrack5{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/shy.jpg) no-repeat 5px 50%;;
-  background-size: 150px 150px;
-  background-position: bottom right;
-}
-.cardtrack6{
-  border-bottom: 1px dotted #4A3903;
-  background: url(/assets/imgs/factory.png) no-repeat 5px 50%;;
-  background-size: 150px 150px;
-  background-position: bottom right;
+.podracerimage {
+  width: 100px;
+  height: 100px;
 }
 
 .sr-only {
