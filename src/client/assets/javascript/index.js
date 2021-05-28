@@ -7,6 +7,40 @@ var store = {
 	race_id: undefined,
 }
 
+const trackNames = {
+	"Track 1": "Luigi Raceway",
+	"Track 2": "Peach Circuit",
+	"Track 3": "Yoshi Falls",
+	"Track 4": "Mushroom Gorge",
+	"Track 5": "Shy Guy Beach",
+	"Track 6": "Toad's Factory"
+}
+
+const trackImages = {
+	"Track 1": "luigiraceway.png",
+	"Track 2": "peach.PNG",
+	"Track 3": "yoshifalls.png",
+	"Track 4": "gorge.jpg",
+	"Track 5": "shy.jpg",
+	"Track 6": "factory.png",		
+}
+
+const racerNames = {
+	"Racer 1": "Mario",
+	"Racer 2": "Luigi",
+	"Racer 3": "Yoshi",
+	"Racer 4": "Peachette",
+	"Racer 5": "Toadette"	
+}
+
+const racerImages = {
+	"Racer 1": "mario.png",
+	"Racer 2": "luigi.png",
+	"Racer 3": "yoshi.png",
+	"Racer 4": "pachette.png",
+	"Racer 5": "toadette.png"	
+}
+
 // We need our javascript to wait until the DOM is loaded
 document.addEventListener("DOMContentLoaded", function() {
 	onPageLoad()
@@ -215,20 +249,6 @@ function renderRacerCars(racers) {
 
 function renderRacerCard(racer) {
 	const { id, driver_name, top_speed, acceleration, handling } = racer
-	racerNames = {
-		"Racer 1": "Mario",
-		"Racer 2": "Luigi",
-		"Racer 3": "Yoshi",
-		"Racer 4": "Peachette",
-		"Racer 5": "Toadette"	
-	}
-	racerImages = {
-		"Racer 1": "mario.png",
-		"Racer 2": "luigi.png",
-		"Racer 3": "yoshi.png",
-		"Racer 4": "pachette.png",
-		"Racer 5": "toadette.png"	
-	}
 	return `
 		<li class="card podracer" id="${id}">
 			<img src="/assets/imgs/${racerImages[driver_name]}" class="podracerimage">
@@ -258,22 +278,6 @@ function renderTrackCards(tracks) {
 
 function renderTrackCard(track) {
 	const { id, name } = track
-	trackNames = {
-		"Track 1": "Luigi Raceway",
-		"Track 2": "Peach Circuit",
-		"Track 3": "Yoshi Falls",
-		"Track 4": "Mushroom Gorge",
-		"Track 5": "Shy Guy Beach",
-		"Track 6": "Toad's Factory"
-	}
-	trackImages = {
-		"Track 1": "luigiraceway.png",
-		"Track 2": "peach.PNG",
-		"Track 3": "yoshifalls.png",
-		"Track 4": "gorge.jpg",
-		"Track 5": "shy.jpg",
-		"Track 6": "factory.png",		
-	}
 	return `
 		<li id="${id}" class="card track">
 			<img src="/assets/imgs/${trackImages[name]}" class="trackimage">
@@ -292,7 +296,7 @@ function renderCountdown(count) {
 function renderRaceStartView(track, racers) {
 	return `
 		<header>
-			<h1>Race: ${track.name}</h1>
+			<h1>Race: ${trackNames[track.name]}</h1>
 		</header>
 		<main id="two-columns">
 			<section id="leaderBoard">
@@ -325,7 +329,14 @@ function resultsView(positions) {
 
 function raceProgress(positions) {
 	let userPlayer = positions.find(e => e.id === store.player_id)
-	userPlayer.driver_name += " (you)"
+	const getNames = (driverName) => {
+		if(userPlayer.driver_name == driverName){
+			return racerNames[userPlayer.driver_name] + " (you)"
+		}
+		else{
+			return racerNames[driverName] 
+		}
+	}
 
 	positions = positions.sort((a, b) => (a.segment > b.segment) ? -1 : 1)
 	let count = 1
@@ -334,7 +345,7 @@ function raceProgress(positions) {
 		return `
 			<tr>
 				<td>
-					<h3>${count++} - ${p.driver_name}</h3>
+					<h3>${count++} - ${getNames(p.driver_name)}</h3>
 				</td>
 			</tr>
 		`
@@ -421,12 +432,9 @@ function startRace(id) {
 }
 
 function accelerate(id) {
-	// POST request to `${SERVER}/api/races/${id}/accelerate`
-	// options parameter provided as defaultFetchOpts
-	// no body or datatype needed for this request
 	return fetch(`${SERVER}/api/races/${id}/accelerate`, {
-		method: 'POST', // Other options: PUT, PATCH, DELETE
+		method: 'POST',
 		...defaultFetchOpts(),
 	})
-	.catch(error => console.log("Problem with accelerate request::", error))
+	.catch(err => console.log("Problem with accelerate request::", err))
 }
